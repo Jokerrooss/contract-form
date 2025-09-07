@@ -1,0 +1,71 @@
+{
+	"clientInfo": {
+		"title": "Informacje o kliencie",
+		"date": "Data",
+		"name": "Imię i nazwisko",
+		"namePlaceholder": "Wprowadź imię i nazwisko",
+		"adress": "Adres",
+		"adressPlaceholder": "Ulica i numer",
+		"postal": "Kod pocztowy i miasto",
+		"postalPlaceholder": "00-000 Warszawa"
+	},
+	"itemInfo": {
+		"addItemTitle": "Dodaj pozycję",
+		"productName": "Nazwa produktu",
+		"productNamePlaceholder": "Wprowadź nazwę",
+		"quantity": "Ilość",
+		"unitPrice": "Cena jednostkowa",
+		"currency": "Waluta",
+		"euro": "EURO",
+		"addItemButton": "Dodaj pozycję"
+	},
+	"itemsTable": {
+		"noItemsTitle": "Brak pozycji w umowie",
+		"noItemsText": "Dodaj pierwszą pozycję używając formularza powyżej",
+		"tableTitle": "Pozycje umowy ({{count}})",
+		"headers": {
+			"name": "Nazwa",
+			"quantity": "Ilość",
+			"unitPrice": "Cena jedn.",
+			"currency": "Waluta",
+			"total": "Wartość",
+			"actions": "Akcje"
+		}
+	},
+	"signature": {
+		"title": "Podpis cyfrowy",
+		"instruction": "Kliknij i przeciągnij aby podpisać",
+		"instructionMobile": "Lub użyj dotyku na urządzeniu mobilnym",
+		"clear": "Wyczyść podpis",
+		"download": "Pobierz podpis",
+		"statusSigned": "Podpis został złożony",
+		"statusRequired": "Podpis wymagany",
+		"noteSigned": "Podpis zostanie dołączony do wygenerowanego PDF",
+		"noteRequired": "Złóż podpis aby móc wygenerować umowę"
+	},
+	"summary": {
+		"title": "Podsumowanie",
+		"itemsCount": "Liczba pozycji:",
+		"netTotalPLN": "Suma netto (PLN)",
+		"grossTotalPLN": "Suma brutto (PLN)",
+		"netTotalEUR": "Suma netto (EUR)",
+		"grossTotalEUR": "Suma brutto (EUR)",
+		"vat": "VAT (23%)",
+		"noItems": "Brak pozycji do podsumowania"
+	},
+	"contract": {
+		"title": "Generowanie umowy",
+		"clientInfo": "Informacje o kliencie",
+		"items": "Pozycje umowy",
+		"signature": "Podpis cyfrowy",
+		"readiness": "Gotowość",
+		"progress": "Postęp formularza",
+		"generatePDF": "Generuj PDF",
+		"generating": "Generowanie...",
+		"formIncomplete": "Formularz niekompletny",
+		"fillRequired": "Uzupełnij wszystkie wymagane pola aby wygenerować umowę PDF.",
+		"formReady": "Formularz gotowy",
+		"readyToGenerate": "Wszystkie wymagane pola zostały uzupełnione. Możesz wygenerować umowę.",
+		"pdfError": "Błąd generowania PDF:"
+	}
+}

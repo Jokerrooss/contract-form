@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useUserData } from '../contexts/UserDataContext'
 import { HugeiconsIcon } from '@hugeicons/react'
+import { useTranslation } from 'react-i18next'
 import {
 	Alert02Icon,
 	CheckmarkSquare03Icon,
@@ -10,6 +11,7 @@ import {
 } from '@hugeicons/core-free-icons'
 
 function Signature() {
+	const { t } = useTranslation()
 	const canvasRef = useRef(null)
 	const [isDrawing, setIsDrawing] = useState(false)
 	const [hasSignature, setHasSignature] = useState(false)
@@ -32,7 +34,6 @@ function Signature() {
 		canvas.height = rect.height * window.devicePixelRatio
 		ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
 
-		// jeśli jest zapisany podpis w providerze → wczytaj go
 		if (signature) {
 			const img = new Image()
 			img.onload = () => {
@@ -103,19 +104,17 @@ function Signature() {
 		const signatureDataURL = canvas.toDataURL('image/png')
 		handleInputChange('signature', signatureDataURL)
 
-		// pobierz jako plik
 		const link = document.createElement('a')
-		link.download = `podpis-${new Date().toISOString().split('T')[0]}.png`
+		link.download = `signature-${new Date().toISOString().split('T')[0]}.png`
 		link.href = signatureDataURL
 		link.click()
 	}
 
 	return (
 		<div className="bg-white border border-slate-200 p-6">
-			<h2 className="text-lg font-semibold text-text-primary mb-4">Podpis cyfrowy</h2>
+			<h2 className="text-lg font-semibold text-text-primary mb-4">{t('signature.title')}</h2>
 
 			<div className="space-y-4">
-				{/* Canvas */}
 				<div className="relative">
 					<canvas
 						ref={canvasRef}
@@ -132,35 +131,31 @@ function Signature() {
 					{!hasSignature && (
 						<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
 							<div className="text-center">
-								<p>
-									<HugeiconsIcon icon={PenTool03Icon} color="#9ca3af" size={36} className="mx-auto mb-4" />
-								</p>
-								<p className="text-sm text-text-secondary">Kliknij i przeciągnij aby podpisać</p>
-								<p className="text-xs text-text-secondary mt-1">Lub użyj dotyku na urządzeniu mobilnym</p>
+								<HugeiconsIcon icon={PenTool03Icon} color="#9ca3af" size={36} className="mx-auto mb-4" />
+								<p className="text-sm text-text-secondary">{t('signature.instruction')}</p>
+								<p className="text-xs text-text-secondary mt-1">{t('signature.instructionMobile')}</p>
 							</div>
 						</div>
 					)}
 				</div>
 
-				{/* Buttons */}
 				<div className="flex flex-col sm:flex-row gap-3">
 					<button
 						onClick={clearSignature}
 						disabled={!hasSignature}
 						className="flex-1 flex items-center justify-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 disabled:opacity-50">
 						<HugeiconsIcon icon={RefreshIcon} size={15} />
-						Wyczyść podpis
+						{t('signature.clear')}
 					</button>
 					<button
 						onClick={saveSignature}
 						disabled={!hasSignature}
 						className="flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 disabled:opacity-50">
 						<HugeiconsIcon icon={Download04Icon} size={20} strokeWidth={2} />
-						Pobierz podpis
+						{t('signature.download')}
 					</button>
 				</div>
 
-				{/* Status */}
 				<div className={'flex space-x-2 p-3 border border-slate-200'}>
 					<span>
 						{hasSignature ? (
@@ -171,12 +166,10 @@ function Signature() {
 					</span>
 					<div>
 						<p className={`text-xs font-medium ${hasSignature ? 'text-green-600' : 'text-yellow-600'}`}>
-							{hasSignature ? 'Podpis został złożony' : 'Podpis wymagany'}
+							{hasSignature ? t('signature.statusSigned') : t('signature.statusRequired')}
 						</p>
 						<p className="text-xs text-text-secondary mt-1">
-							{hasSignature
-								? 'Podpis zostanie dołączony do wygenerowanego PDF'
-								: 'Złóż podpis aby móc wygenerować umowę'}
+							{hasSignature ? t('signature.noteSigned') : t('signature.noteRequired')}
 						</p>
 					</div>
 				</div>

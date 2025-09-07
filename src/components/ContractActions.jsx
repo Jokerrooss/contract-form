@@ -12,8 +12,10 @@ import {
 } from '@hugeicons/core-free-icons'
 import { pdf } from '@react-pdf/renderer'
 import ContractPDF from './ContractPDF'
+import { useTranslation } from 'react-i18next'
 
 function ContractActions() {
+	const { t } = useTranslation()
 	const { date, name, adress, postalCodeCity, items, signature } = useUserData()
 	const [isGenerating, setIsGenerating] = useState(false)
 
@@ -27,17 +29,17 @@ function ContractActions() {
 
 	const getValidationStatus = () => [
 		{
-			label: 'Informacje o kliencie',
+			label: t('contract.clientInfo'),
 			valid: date && name && adress && postalCodeCity,
 			icon: <HugeiconsIcon icon={User02Icon} size={16} />,
 		},
 		{
-			label: 'Pozycje umowy',
+			label: t('contract.items'),
 			valid: items?.length > 0,
 			icon: <HugeiconsIcon icon={PackageIcon} size={16} />,
 		},
 		{
-			label: 'Podpis cyfrowy',
+			label: t('contract.signature'),
 			valid: signature !== null,
 			icon: <HugeiconsIcon icon={PenTool03Icon} size={16} />,
 		},
@@ -67,7 +69,7 @@ function ContractActions() {
 			link.click()
 			URL.revokeObjectURL(url)
 		} catch (err) {
-			console.error('Błąd generowania PDF:', err)
+			console.error(t('contract.pdfError'), err)
 		} finally {
 			setIsGenerating(false)
 		}
@@ -76,10 +78,12 @@ function ContractActions() {
 	return (
 		<div className="bg-white border border-slate-200 p-6">
 			<div className="flex items-center justify-between mb-4">
-				<h2 className="text-lg font-semibold text-text-primary">Generowanie umowy</h2>
+				<h2 className="text-lg font-semibold text-text-primary">{t('contract.title')}</h2>
 				<div className="flex items-center space-x-1 text-xs text-text-secondary">
 					<HugeiconsIcon icon={LicenseIcon} size={14} />
-					<span>Gotowość: {validChecks}/3</span>
+					<span>
+						{t('contract.readiness')}: {validChecks}/3
+					</span>
 				</div>
 			</div>
 
@@ -96,10 +100,9 @@ function ContractActions() {
 				</div>
 			))}
 
-			{/* Progress Bar */}
 			<div className="mb-6 mt-5">
 				<div className="flex items-center justify-between mb-2">
-					<span className="text-xs font-medium text-text-primary">Postęp formularza</span>
+					<span className="text-xs font-medium text-text-primary">{t('contract.progress')}</span>
 					<span className="text-xs text-text-secondary">{Math.round((validChecks / 3) * 100)}%</span>
 				</div>
 				<div className="w-full bg-muted rounded-full h-2 bg-slate-100">
@@ -110,25 +113,21 @@ function ContractActions() {
 				</div>
 			</div>
 
-			{/* Action Button */}
 			<button
 				onClick={handleDownloadPDF}
 				disabled={isGenerating || !isFormValid()}
 				className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-white font-medium transition bg-blue-500 disabled:opacity-50`}>
 				<HugeiconsIcon icon={Download04Icon} size={20} strokeWidth={2} />
-				{isGenerating ? 'Generowanie...' : 'Generuj PDF'}
+				{isGenerating ? t('contract.generating') : t('contract.generatePDF')}
 			</button>
 
-			{/* Status Messages */}
 			{!isFormValid() && (
 				<div className="mt-4 p-3 border border-slate-200">
 					<div className="flex items-start space-x-2">
 						<HugeiconsIcon icon={Alert02Icon} size={18} className="text-yellow-600" />
 						<div>
-							<p className="text-xs font-medium text-yellow-600">Formularz niekompletny</p>
-							<p className="text-xs text-text-secondary mt-1">
-								Uzupełnij wszystkie wymagane pola aby wygenerować umowę PDF.
-							</p>
+							<p className="text-xs font-medium text-yellow-600">{t('contract.formIncomplete')}</p>
+							<p className="text-xs text-text-secondary mt-1">{t('contract.fillRequired')}</p>
 						</div>
 					</div>
 				</div>
@@ -139,10 +138,8 @@ function ContractActions() {
 					<div className="flex items-start space-x-2">
 						<HugeiconsIcon icon={CheckmarkSquare03Icon} size={18} className="text-green-600" />
 						<div>
-							<p className="text-xs font-medium text-green-600">Formularz gotowy</p>
-							<p className="text-xs text-text-secondary mt-1">
-								Wszystkie wymagane pola zostały uzupełnione. Możesz wygenerować umowę.
-							</p>
+							<p className="text-xs font-medium text-green-600">{t('contract.formReady')}</p>
+							<p className="text-xs text-text-secondary mt-1">{t('contract.readyToGenerate')}</p>
 						</div>
 					</div>
 				</div>

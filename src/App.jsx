@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import GeneratorPl from './pages/GeneratorPl'
-import GeneratorEn from './pages/GeneratorEn'
 import { UserDataProvider } from './contexts/UserDataContext'
+import LangLayout from './LangLayout'
+import Generator from './pages/Generator'
 
 function App() {
 	return (
@@ -9,8 +9,11 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route index path="/" element={<Navigate replace to="pl" />} />
-					<Route path="pl" element={<GeneratorPl />} />
-					<Route path="en" element={<GeneratorEn />} />
+
+					{/* obsługa języka przez param :lang */}
+					<Route path=":lang" element={<LangLayout />}>
+						<Route index element={<Generator />} />
+					</Route>
 				</Routes>
 			</BrowserRouter>
 		</UserDataProvider>

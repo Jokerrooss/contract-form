@@ -1,0 +1,71 @@
+{
+	"clientInfo": {
+		"title": "Client information",
+		"date": "Date",
+		"name": "Full name",
+		"namePlaceholder": "Enter full name",
+		"adress": "Address",
+		"adressPlaceholder": "Street and number",
+		"postal": "Postal code and city",
+		"postalPlaceholder": "00-000 Warsaw"
+	},
+	"itemInfo": {
+		"addItemTitle": "Add Item",
+		"productName": "Product Name",
+		"productNamePlaceholder": "Enter product name",
+		"quantity": "Quantity",
+		"unitPrice": "Unit Price",
+		"currency": "Currency",
+		"euro": "EURO",
+		"addItemButton": "Add Item"
+	},
+	"itemsTable": {
+		"noItemsTitle": "No items in the contract",
+		"noItemsText": "Add the first item using the form above",
+		"tableTitle": "Contract items ({{count}})",
+		"headers": {
+			"name": "Name",
+			"quantity": "Quantity",
+			"unitPrice": "Unit price",
+			"currency": "Currency",
+			"total": "Total",
+			"actions": "Actions"
+		}
+	},
+	"signature": {
+		"title": "Digital Signature",
+		"instruction": "Click and drag to sign",
+		"instructionMobile": "Or use touch on a mobile device",
+		"clear": "Clear signature",
+		"download": "Download signature",
+		"statusSigned": "Signature completed",
+		"statusRequired": "Signature required",
+		"noteSigned": "The signature will be included in the generated PDF",
+		"noteRequired": "Sign to be able to generate the contract"
+	},
+	"summary": {
+		"title": "Summary",
+		"itemsCount": "Number of items:",
+		"netTotalPLN": "Net total (PLN)",
+		"grossTotalPLN": "Gross total (PLN)",
+		"netTotalEUR": "Net total (EUR)",
+		"grossTotalEUR": "Gross total (EUR)",
+		"vat": "VAT (23%)",
+		"noItems": "No items to summarize"
+	},
+	"contract": {
+		"title": "Contract Generation",
+		"clientInfo": "Client Information",
+		"items": "Contract Items",
+		"signature": "Digital Signature",
+		"readiness": "Readiness",
+		"progress": "Form Progress",
+		"generatePDF": "Generate PDF",
+		"generating": "Generating...",
+		"formIncomplete": "Form incomplete",
+		"fillRequired": "Fill all required fields to generate the PDF.",
+		"formReady": "Form ready",
+		"readyToGenerate": "All required fields are filled. You can generate the contract.",
+		"pdfError": "Error generating PDF:"
+	}
+}
