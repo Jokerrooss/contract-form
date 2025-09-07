@@ -22,68 +22,60 @@ function ItemsTable() {
 
 	if (!items || items.length === 0) {
 		return (
-			<div className="bg-card border border-border rounded-lg p-8">
+			<div className="bg-white border border-gray-200 p-8">
 				<div className="text-center">
-					<HugeiconsIcon icon={PackageIcon} size={48} color="var(--color-muted-foreground)" className="mx-auto mb-4" />
-					<h3 className="text-lg font-medium text-text-primary mb-2">Brak pozycji w umowie</h3>
-					<p className="text-text-secondary">Dodaj pierwszą pozycję używając formularza powyżej</p>
+					<HugeiconsIcon icon={PackageIcon} size={48} color="#9ca3af" className="mx-auto mb-4" />
+					<h3 className="text-lg font-medium text-gray-800 mb-2">Brak pozycji w umowie</h3>
+					<p className="text-gray-500">Dodaj pierwszą pozycję używając formularza powyżej</p>
 				</div>
 			</div>
 		)
 	}
 
 	return (
-		<div className="bg-card border border-border rounded-lg overflow-hidden">
-			<div className="px-6 py-4 border-b border-border">
-				<h2 className="text-lg font-semibold text-text-primary">Pozycje umowy ({items.length})</h2>
+		<div className="bg-white border border-gray-200 overflow-hidden">
+			<div className="px-6 py-4 border-gray-200">
+				<h2 className="text-base font-semibold text-gray-800">Pozycje umowy ({items.length})</h2>
 			</div>
 			<div className="overflow-x-auto">
-				<table className="w-full">
-					<thead className="bg-muted">
-						<tr>
-							<th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-								Nazwa
-							</th>
-							<th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-								Ilość
-							</th>
-							<th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+				<table className="w-full border-collapse">
+					<thead>
+						<tr className="border-b border-gray-200 bg-gray-50">
+							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nazwa</th>
+							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ilość</th>
+							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 								Cena jedn.
 							</th>
-							<th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-								Waluta
-							</th>
-							<th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Waluta</th>
+							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 								Wartość
 							</th>
-							<th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-								Akcje
-							</th>
+							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Akcje</th>
 						</tr>
 					</thead>
-					<tbody className="bg-card divide-y divide-border">
+					<tbody>
 						{items.map((item, index) => (
-							<tr key={index} className="hover:bg-muted/50 transition-colors">
-								<td className="px-6 py-4 whitespace-nowrap">
-									<div className="text-sm font-medium text-text-primary">{item.itemName}</div>
+							<tr key={index} className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+								<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.itemName}</td>
+								<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.quantity}</td>
+								<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+									{item.unitPrice} {item.currency === 'PLN' ? 'zł' : '€'}
+								</td>
+								<td className="px-6 py-4 whitespace-nowrap text-sm">
+									<span className="text-blue-600 font-medium cursor-pointer">{item.currency}</span>
+								</td>
+								<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+									{item.quantity * item.unitPrice} {item.currency === 'PLN' ? 'zł' : '€'}
 								</td>
 								<td className="px-6 py-4 whitespace-nowrap">
-									<div className="text-sm text-text-primary">{item.quantity}</div>
-								</td>
-								<td className="px-6 py-4 whitespace-nowrap">
-									<div className="text-sm text-text-primary">{item.unitPrice}</div>
-								</td>
-								<td className="px-6 py-4 whitespace-nowrap">
-									<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-										{item.currency}
-									</span>
-								</td>
-								<td className="px-6 py-4 whitespace-nowrap">
-									<div className="text-sm font-medium text-text-primary">{item.quantity * item.unitPrice}</div>
-								</td>
-								<td className="px-6 py-4 whitespace-nowrap">
-									<div className="flex items-center space-x-2">
-										<HugeiconsIcon icon={Delete02Icon} onClick={() => onRemoveItem(index)} iconSize={14} />
+									<div className="flex items-center space-x-3">
+										{/* Ikona usuwania */}
+										<HugeiconsIcon
+											icon={Delete02Icon}
+											onClick={() => onRemoveItem(index)}
+											size={18}
+											className="text-red-500 cursor-pointer hover:text-red-700"
+										/>
 									</div>
 								</td>
 							</tr>

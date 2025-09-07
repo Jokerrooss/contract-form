@@ -8,8 +8,7 @@ function Input({ label, type = 'text', placeholder, inputId, required = false, c
 	const value = localValue !== undefined ? localValue : valueFromContext || ''
 	const onChange = localOnChange !== undefined ? localOnChange : e => handleInputChange(inputId, e.target.value)
 
-	const baseInputClasses =
-		'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+	const baseInputClasses = 'flex h-10 w-full bg-zinc-50 px-3 py-2 text-sm'
 
 	if (type === 'checkbox') {
 		return (

@@ -22,7 +22,7 @@ function ItemInfo() {
 	}
 
 	return (
-		<div className="bg-card border border-border rounded-lg p-6">
+		<div className="bg-white border border-slate-200 p-6">
 			<h2 className="text-lg font-semibold mb-4">Dodaj pozycję</h2>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
 				<Input
@@ -52,17 +52,22 @@ function ItemInfo() {
 					localValue={newItem.unitPrice}
 					localOnChange={e => handleChange('unitPrice', e.target.value)}
 				/>
+				<div>
+					<label htmlFor="currencySelect" className="text-sm font-medium">
+						Waluta <span className="text-destructive ml-1">*</span>
+					</label>
+					<select
+						id="currencySelect"
+						value={newItem.currency}
+						onChange={e => handleChange('currency', e.target.value)}
+						className="border p-2 w-full mb-4">
+						<option value="PLN">PLN</option>
+						<option value="EUR">EURO</option>
+					</select>
+				</div>
 			</div>
 
-			<select
-				value={newItem.currency}
-				onChange={e => handleChange('currency', e.target.value)}
-				className="border rounded-md p-2 w-full mb-4">
-				<option value="PLN">PLN</option>
-				<option value="EUR">EURO</option>
-			</select>
-
-			<button onClick={handleAddItem} className="bg-primary text-white px-4 py-2 rounded-lg">
+			<button onClick={handleAddItem} className="bg-primary text-white px-4 py-2 ">
 				Dodaj pozycję
 			</button>
 		</div>

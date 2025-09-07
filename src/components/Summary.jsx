@@ -33,11 +33,10 @@ function Summary() {
 	const { totalPLN, totalEUR } = calculateSeparateTotals()
 	const vatAmountPLN = totalPLN * 0.23
 	const vatAmountEUR = totalEUR * 0.23
-	const totalWithVATPLN = totalPLN + vatAmountPLN
-	const totalWithVATEUR = totalEUR + vatAmountEUR
-
+	const totalWithoutVATPLN = totalPLN - vatAmountPLN
+	const totalWithoutVATEUR = totalEUR - vatAmountEUR
 	return (
-		<div className="bg-card border border-border rounded-lg p-6">
+		<div className="bg-white border border-slate-200 p-6">
 			<div className="flex items-center justify-between mb-4">
 				<h2 className="text-lg font-semibold text-text-primary">Podsumowanie</h2>
 			</div>
@@ -48,16 +47,18 @@ function Summary() {
 					<span className="text-sm font-medium text-text-primary">{items?.length}</span>
 				</div>
 
-				<div className="border-t border-border pt-4 space-y-4">
+				<div className="border-t border-slate-200 pt-4 space-y-4">
 					{/* PLN Summary */}
 					{totalPLN > 0 && (
-						<div className="bg-muted/50 rounded-lg p-4">
+						<div className="bg-muted/50 p-4">
 							<div className="flex items-center justify-between mb-2">
 								<span className="text-sm font-medium text-text-primary flex items-center">
 									<HugeiconsIcon icon={CoinsIcon} size={16} className="mr-2" />
 									Suma netto (PLN)
 								</span>
-								<span className="text-lg font-semibold text-text-primary">{formatCurrency(totalPLN, 'PLN')}</span>
+								<span className="text-lg font-semibold text-text-primary">
+									{formatCurrency(totalWithoutVATPLN, 'PLN')}
+								</span>
 							</div>
 
 							<div className="flex items-center justify-between mb-2">
@@ -65,10 +66,10 @@ function Summary() {
 								<span className="text-sm font-medium text-text-primary">{formatCurrency(vatAmountPLN, 'PLN')}</span>
 							</div>
 
-							<div className="border-t border-border pt-2 mt-2">
+							<div className="border-t border-slate-200 pt-2 mt-2">
 								<div className="flex items-center justify-between">
 									<span className="text-sm font-semibold text-text-primary">Suma brutto (PLN)</span>
-									<span className="text-xl font-bold text-primary">{formatCurrency(totalWithVATPLN, 'PLN')}</span>
+									<span className="text-xl font-bold text-primary">{formatCurrency(totalPLN, 'PLN')}</span>
 								</div>
 							</div>
 						</div>
@@ -76,13 +77,13 @@ function Summary() {
 
 					{/* EUR Summary */}
 					{totalEUR > 0 && (
-						<div className="bg-accent/10 rounded-lg p-4">
+						<div className="bg-accent/10 p-4">
 							<div className="flex items-center justify-between mb-2">
 								<span className="text-sm font-medium text-text-primary flex items-center">
 									<HugeiconsIcon icon={EuroIcon} size={16} className="mr-2" />
 									Suma netto (EUR)
 								</span>
-								<span className="text-lg font-semibold text-accent">{formatCurrency(totalEUR, 'EUR')}</span>
+								<span className="text-lg font-semibold text-accent">{formatCurrency(totalWithoutVATEUR, 'EUR')}</span>
 							</div>
 
 							<div className="flex items-center justify-between mb-2">
@@ -90,10 +91,10 @@ function Summary() {
 								<span className="text-sm font-medium text-text-primary">{formatCurrency(vatAmountEUR, 'EUR')}</span>
 							</div>
 
-							<div className="border-t border-border pt-2 mt-2">
+							<div className="border-t border-slate-200 pt-2 mt-2">
 								<div className="flex items-center justify-between">
 									<span className="text-sm font-semibold text-text-primary">Suma brutto (EUR)</span>
-									<span className="text-xl font-bold text-accent">{formatCurrency(totalWithVATEUR, 'EUR')}</span>
+									<span className="text-xl font-bold text-accent">{formatCurrency(totalEUR, 'EUR')}</span>
 								</div>
 							</div>
 						</div>
@@ -101,7 +102,7 @@ function Summary() {
 
 					{/* No items message */}
 					{totalPLN === 0 && totalEUR === 0 && (
-						<div className="bg-muted/30 rounded-lg p-4 text-center">
+						<div className="bg-muted/30 p-4 text-center">
 							<span className="text-sm text-text-secondary">Brak pozycji do podsumowania</span>
 						</div>
 					)}
