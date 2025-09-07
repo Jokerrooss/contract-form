@@ -65,7 +65,7 @@ function ItemsTable() {
 									<span className="text-blue-600 font-medium cursor-pointer">{item.currency}</span>
 								</td>
 								<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-									{item.quantity * item.unitPrice} {item.currency === 'PLN' ? 'zł' : '€'}
+									{Number(item.quantity || 0) * Number(item.unitPrice || 0)} {item.currency === 'PLN' ? 'zł' : '€'}
 								</td>
 								<td className="px-6 py-4 whitespace-nowrap">
 									<div className="flex items-center space-x-3">

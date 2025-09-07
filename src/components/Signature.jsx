@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useUserData } from '../contexts/UserDataContext'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Alert02Icon, CheckmarkSquare03Icon, PenTool03Icon } from '@hugeicons/core-free-icons'
+import {
+	Alert02Icon,
+	CheckmarkSquare03Icon,
+	PenTool03Icon,
+	RefreshIcon,
+	Download04Icon,
+} from '@hugeicons/core-free-icons'
 
 function Signature() {
 	const canvasRef = useRef(null)
@@ -141,13 +147,15 @@ function Signature() {
 					<button
 						onClick={clearSignature}
 						disabled={!hasSignature}
-						className="flex-1 bg-gray-200 text-gray-700 px-4 py-2 disabled:opacity-50">
+						className="flex-1 flex items-center justify-center gap-2 bg-gray-200 text-gray-700 px-4 py-2 disabled:opacity-50">
+						<HugeiconsIcon icon={RefreshIcon} size={15} />
 						Wyczyść podpis
 					</button>
 					<button
 						onClick={saveSignature}
 						disabled={!hasSignature}
-						className="flex-1 bg-blue-600 text-white px-4 py-2 disabled:opacity-50">
+						className="flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 disabled:opacity-50">
+						<HugeiconsIcon icon={Download04Icon} size={20} strokeWidth={2} />
 						Pobierz podpis
 					</button>
 				</div>

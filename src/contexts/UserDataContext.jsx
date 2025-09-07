@@ -3,21 +3,21 @@ import { createContext, useContext, useReducer } from 'react'
 const UserDataContext = createContext()
 
 const initialState = {
-	date: '04.09.2025',
+	date: '2025-09-04',
 	name: 'Konrad Mag',
 	adress: 'Piotrk 55',
 	postalCodeCity: '00-000 Warszawa',
 	items: [
 		{
 			itemName: 'Nike',
-			quantity: '2',
-			unitPrice: '200',
+			quantity: 2,
+			unitPrice: 200,
 			currency: 'PLN',
 		},
 		{
 			itemName: 'Adidas',
-			quantity: '3',
-			unitPrice: '100',
+			quantity: 3,
+			unitPrice: 100,
 			currency: 'EUR',
 		},
 	],
@@ -37,7 +37,7 @@ function reducer(state, action) {
 		case 'item/add':
 			return { ...state, items: [...state.items, action.payload] }
 		case 'item/remove':
-			return { ...state, items: state.items.filter((_, i) => i !== action.payload) }
+			return { ...state, items: Array.isArray(state.items) ? state.items.filter((_, i) => i !== action.payload) : [] }
 		case 'signature/set':
 			return { ...state, signature: action.payload }
 		default:

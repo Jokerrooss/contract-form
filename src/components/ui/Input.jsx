@@ -17,7 +17,7 @@ function Input({ label, type = 'text', placeholder, inputId, required = false, c
 				id={inputId}
 				checked={value}
 				onChange={onChange}
-				className={`h-4 w-4 rounded border border-input bg-background text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+				className={`h-4 w-4 rounded border border-input focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
 			/>
 		)
 	}
@@ -29,7 +29,7 @@ function Input({ label, type = 'text', placeholder, inputId, required = false, c
 				id={inputId}
 				checked={value}
 				onChange={onChange}
-				className={`h-4 w-4 rounded-full border border-input bg-background text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+				className={`h-4 w-4 rounded-full border border-input focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
 			/>
 		)
 	}

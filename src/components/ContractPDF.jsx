@@ -95,12 +95,7 @@ const styles = StyleSheet.create({
 })
 
 export default function ContractPDF({ date, name, adress, postalCodeCity, items, signature }) {
-	// Zabezpieczenie przed pustą tablicą items
-	const hasItems = items && items.length > 0
-
-	// Obliczanie łącznej kwoty
-	const totalPrice = hasItems ? items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0) : 0
-
+	console.log(signature)
 	return (
 		<Document>
 			<Page size="A4" style={styles.page}>
@@ -142,7 +137,7 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 				<View style={styles.section}>
 					<Text style={styles.indent}>1. Sprzedający sprzedaje, a Kupujący kupuje:</Text>
 
-					{/* Tabela przedmiotów - z zabezpieczeniem */}
+					{/* Tabela przedmiotów */}
 					<View style={styles.table}>
 						<View style={[styles.tableRow, styles.tableHeader]}>
 							{['Model', 'Ilość', 'Cena za sztukę', 'Razem'].map((col, idx) => (
@@ -152,44 +147,33 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 							))}
 						</View>
 
-						{hasItems ? (
-							items.map((item, idx) => (
-								<View style={styles.tableRow} key={idx}>
-									<View style={styles.tableCol}>
-										<Text>{item.itemName || ''}</Text>
-									</View>
-									<View style={styles.tableCol}>
-										<Text>{item.quantity || ''}</Text>
-									</View>
-									<View style={styles.tableCol}>
-										<Text>
-											{item.unitPrice || ''} {item.currency === 'PLN' ? 'zł' : '€'}
-										</Text>
-									</View>
-									<View style={styles.tableCol}>
-										<Text>
-											{item.quantity * item.unitPrice || ''} {item.currency === 'PLN' ? 'zł' : '€'}
-										</Text>
-									</View>
+						{items?.map((item, idx) => (
+							<View style={styles.tableRow} key={idx}>
+								<View style={styles.tableCol}>
+									<Text>{item.itemName}</Text>
 								</View>
-							))
-						) : (
-							// Pusty wiersz gdy nie ma przedmiotów
-							<View style={styles.tableRow}>
-								{['', '', '', ''].map((_, idx) => (
-									<View key={idx} style={styles.tableCol}>
-										<Text>-</Text>
-									</View>
-								))}
+								<View style={styles.tableCol}>
+									<Text>{item.quantity}</Text>
+								</View>
+								<View style={styles.tableCol}>
+									<Text>
+										{item.unitPrice} {item.currency === 'PLN' ? 'zł' : '€'}
+									</Text>
+								</View>
+								<View style={styles.tableCol}>
+									<Text>
+										{item.quantity * item.unitPrice} {item.currency === 'PLN' ? 'zł' : '€'}
+									</Text>
+								</View>
 							</View>
-						)}
+						))}
 					</View>
 
 					<Text style={styles.indent}>dalej zwanym towarem (i/lub towarami)</Text>
 
 					<Text style={styles.indent}>
 						2. Cena towaru (lub towarów) zostaje ustalona na łączną kwotę brutto:
-						<Text style={styles.bold}> {totalPrice} zł</Text>
+						<Text style={styles.bold}></Text>
 					</Text>
 
 					<Text style={styles.indent}>
@@ -253,11 +237,8 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 				{/* Podpisy */}
 				<View style={styles.signatureBlock}>
 					<View style={styles.signatureBox}>
-						{signature ? (
-							<Image src={signature} style={styles.signatureImage} />
-						) : (
-							<Text style={styles.signatureLine}> </Text>
-						)}
+						<Image src={signature} style={styles.signatureImage} />
+						<Text style={styles.signatureLine}> </Text>
 						<Text>Kupujący</Text>
 					</View>
 					<View style={styles.signatureBox}>

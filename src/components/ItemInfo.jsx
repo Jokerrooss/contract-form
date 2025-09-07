@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Input from './ui/Input'
 import { useUserData } from '../contexts/UserDataContext'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { Add01Icon } from '@hugeicons/core-free-icons'
 
 function ItemInfo() {
 	const { addItem } = useUserData()
@@ -60,14 +62,18 @@ function ItemInfo() {
 						id="currencySelect"
 						value={newItem.currency}
 						onChange={e => handleChange('currency', e.target.value)}
-						className="border p-2 w-full mb-4">
+						className="p-2 w-full mb-4 lg:col-span-2 flex h-10 bg-zinc-50 px-3 py-2 text-sm">
 						<option value="PLN">PLN</option>
 						<option value="EUR">EURO</option>
 					</select>
 				</div>
 			</div>
 
-			<button onClick={handleAddItem} className="bg-primary text-white px-4 py-2 ">
+			<button
+				onClick={handleAddItem}
+				disabled={!newItem.itemName || !newItem.quantity || !newItem.unitPrice}
+				className="flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 disabled:opacity-50">
+				<HugeiconsIcon icon={Add01Icon} size={15} strokeWidth={3} />
 				Dodaj pozycję
 			</button>
 		</div>
