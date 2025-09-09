@@ -4,15 +4,19 @@ import { useUserData } from '../contexts/UserDataContext'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Add01Icon } from '@hugeicons/core-free-icons'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 
 function ItemInfo() {
+	const location = useLocation()
+	const curCurrency = location.pathname === '/pl' ? 'PLN' : 'EUR'
+	console.log(location)
 	const { t } = useTranslation()
 	const { addItem } = useUserData()
 	const [newItem, setNewItem] = useState({
 		itemName: '',
 		quantity: '',
 		unitPrice: '',
-		currency: 'PLN',
+		currency: curCurrency,
 	})
 
 	const handleChange = (field, value) => {
@@ -22,7 +26,7 @@ function ItemInfo() {
 	const handleAddItem = () => {
 		if (!newItem.itemName || !newItem.quantity || !newItem.unitPrice) return
 		addItem(newItem)
-		setNewItem({ itemName: '', quantity: '', unitPrice: '', currency: 'PLN' })
+		setNewItem({ itemName: '', quantity: '', unitPrice: '', currency: curCurrency })
 	}
 
 	return (
