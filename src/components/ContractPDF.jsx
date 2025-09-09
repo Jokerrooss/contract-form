@@ -76,6 +76,12 @@ const styles = StyleSheet.create({
 		marginBottom: -15,
 		alignSelf: 'center',
 	},
+
+	signatureImageBuyer: {
+		width: 80,
+		marginBottom: -10,
+		alignSelf: 'center',
+	},
 	sectionTitle: {
 		fontWeight: 'bold',
 		marginBottom: 3,
@@ -95,13 +101,32 @@ const styles = StyleSheet.create({
 })
 
 export default function ContractPDF({ date, name, adress, postalCodeCity, items, signature }) {
-	console.log(signature)
+	const startDate = new Date('2025-09-09T00:00:00')
+	const now = new Date()
+	const diffMs = now - startDate
+	const diffDays = Math.floor(diffMs / 1000 / 60 / 60 / 24)
+
+	const [firstName, lastName] = name.split(' ')
+	const initials = (firstName?.slice(0, 2) || '') + (lastName?.slice(0, 2) || '')
+
+	const contractNumber = `${initials.toUpperCase()}${diffDays}`
+	const totalPLN = items
+		.filter(item => item.currency === 'PLN')
+		.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0)
+
+	const totalEUR = items
+		.filter(item => item.currency === 'EUR')
+		.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0)
+	console.log(contractNumber)
+	console.log(diffDays)
+	// console.log(number)
+	// console.log(signature)
 	return (
 		<Document>
 			<Page size="A4" style={styles.page}>
 				{/* Tytuł */}
 				<Text style={styles.title}>Umowa sprzedaży</Text>
-				<Text style={styles.contractNumber}>Nr.</Text>
+				<Text style={styles.contractNumber}>Nr {contractNumber}</Text>
 
 				{/* Data i miejsce */}
 				<View style={styles.section}>
@@ -173,7 +198,11 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 
 					<Text style={styles.indent}>
 						2. Cena towaru (lub towarów) zostaje ustalona na łączną kwotę brutto:
-						<Text style={styles.bold}></Text>
+						<Text style={styles.bold}>
+							{totalPLN && !totalEUR ? ` ${totalPLN} zł` : ''}
+							{totalEUR && !totalPLN ? ` ${totalEUR} €` : ''}
+							{totalPLN && totalEUR ? ` ${totalPLN} zł + ${totalEUR} €` : ''}
+						</Text>
 					</Text>
 
 					<Text style={styles.indent}>
@@ -237,11 +266,12 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 				{/* Podpisy */}
 				<View style={styles.signatureBlock}>
 					<View style={styles.signatureBox}>
-						<Image src={signature} style={styles.signatureImage} />
+						<Image src="../../public/signature.png" style={styles.signatureImageBuyer} />
 						<Text style={styles.signatureLine}> </Text>
 						<Text>Kupujący</Text>
 					</View>
 					<View style={styles.signatureBox}>
+						<Image src={signature} style={styles.signatureImage} />
 						<Text style={styles.signatureLine}> </Text>
 						<Text>Sprzedający</Text>
 					</View>
