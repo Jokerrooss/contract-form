@@ -66,6 +66,13 @@
 		"fillRequired": "Uzupełnij wszystkie wymagane pola aby wygenerować umowę PDF.",
 		"formReady": "Formularz gotowy",
 		"readyToGenerate": "Wszystkie wymagane pola zostały uzupełnione. Możesz wygenerować umowę.",
-		"pdfError": "Błąd generowania PDF:"
+		"pdfError": "Błąd generowania PDF:",
+		"payment": "Forma płatności"
+	},
+	"payment": {
+		"title": "Forma płatności",
+		"transfer": "Przelew",
+		"cash": "Gotówka",
+		"account": "Numer rachunku"
 	}
 }

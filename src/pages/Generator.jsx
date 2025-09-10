@@ -7,6 +7,7 @@ import ItemsTable from '../components/ItemsTable'
 import Signature from '../components/Signature'
 import Summary from '../components/Summary'
 import ContractActions from '../components/ContractActions'
+import PaymentMethods from '../components/PaymentMethods'
 
 function Generator() {
 	return (
@@ -20,6 +21,7 @@ function Generator() {
 					<Signature />
 				</div>
 				<div className="space-y-6">
+					<PaymentMethods />
 					<Summary />
 					<ContractActions />
 				</div>

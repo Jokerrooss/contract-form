@@ -66,6 +66,13 @@
 		"fillRequired": "Fill all required fields to generate the PDF.",
 		"formReady": "Form ready",
 		"readyToGenerate": "All required fields are filled. You can generate the contract.",
-		"pdfError": "Error generating PDF:"
+		"pdfError": "Error generating PDF:",
+		"payment": "Payment method"
+	},
+	"payment": {
+		"title": "Payment method",
+		"transfer": "Transfer",
+		"cash": "Cash",
+		"account": "Account number"
 	}
 }

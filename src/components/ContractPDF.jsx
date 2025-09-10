@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
 
 export default function ContractPDF({ date, name, adress, postalCodeCity, items, signature }) {
 	const lang = window.location.href.split('/').at(-1)
-	console.log(lang)
 
 	const startDate = new Date('2025-09-09T00:00:00')
 	const now = new Date()

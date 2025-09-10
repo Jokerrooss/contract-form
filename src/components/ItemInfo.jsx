@@ -9,7 +9,6 @@ import { useLocation } from 'react-router-dom'
 function ItemInfo() {
 	const location = useLocation()
 	const curCurrency = location.pathname === '/pl' ? 'PLN' : 'EUR'
-	console.log(location)
 	const { t } = useTranslation()
 	const { addItem } = useUserData()
 	const [newItem, setNewItem] = useState({
@@ -79,7 +78,7 @@ function ItemInfo() {
 			<button
 				onClick={handleAddItem}
 				disabled={!newItem.itemName || !newItem.quantity || !newItem.unitPrice}
-				className="flex items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 disabled:opacity-50">
+				className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 disabled:opacity-50">
 				<HugeiconsIcon icon={Add01Icon} size={15} strokeWidth={3} />
 				{t('itemInfo.addItemButton')}
 			</button>

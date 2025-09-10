@@ -58,14 +58,14 @@ function Signature() {
 	}
 
 	const startDrawing = e => {
-		e.preventDefault()
+		// e.preventDefault()
 		setIsDrawing(true)
 		setLastPosition(getEventPosition(e))
 	}
 
 	const draw = e => {
 		if (!isDrawing) return
-		e.preventDefault()
+		// e.preventDefault()
 
 		const canvas = canvasRef.current
 		const ctx = canvas.getContext('2d')
@@ -80,9 +80,9 @@ function Signature() {
 		setHasSignature(true)
 	}
 
-	const stopDrawing = e => {
+	const stopDrawing = () => {
 		if (!isDrawing) return
-		e.preventDefault()
+		// e.preventDefault()
 		setIsDrawing(false)
 
 		const canvas = canvasRef.current

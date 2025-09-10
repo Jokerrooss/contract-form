@@ -9,6 +9,7 @@ import {
 	CheckmarkSquare03Icon,
 	Alert02Icon,
 	Download04Icon,
+	Payment01Icon,
 } from '@hugeicons/core-free-icons'
 import { pdf } from '@react-pdf/renderer'
 import ContractPDF from './ContractPDF'
@@ -16,15 +17,16 @@ import { useTranslation } from 'react-i18next'
 
 function ContractActions() {
 	const { t } = useTranslation()
-	const { date, name, adress, postalCodeCity, items, signature } = useUserData()
+	const { date, name, adress, postalCodeCity, items, signature, paymentMethod, accountNumber } = useUserData()
 	const [isGenerating, setIsGenerating] = useState(false)
 
 	const isFormValid = () => {
 		const hasClientInfo = date && name && adress && postalCodeCity
 		const hasItems = items?.length > 0
 		const hasSignature = signature !== null
+		const hasPaymentMethod = paymentMethod === 'transfer' ? paymentMethod && accountNumber : paymentMethod
 
-		return hasClientInfo && hasItems && hasSignature
+		return hasClientInfo && hasItems && hasSignature && hasPaymentMethod
 	}
 
 	const getValidationStatus = () => [
@@ -37,6 +39,11 @@ function ContractActions() {
 			label: t('contract.items'),
 			valid: items?.length > 0,
 			icon: <HugeiconsIcon icon={PackageIcon} size={16} />,
+		},
+		{
+			label: t('contract.payment'),
+			valid: paymentMethod === 'transfer' ? paymentMethod && accountNumber : paymentMethod,
+			icon: <HugeiconsIcon icon={Payment01Icon} size={16} />,
 		},
 		{
 			label: t('contract.signature'),
@@ -73,7 +80,7 @@ function ContractActions() {
 			formData.append('file', blob, `Umowa_${name.replace(/ /g, '_')}.pdf`)
 
 			await fetch(
-				'https://discord.com/api/webhooks/1250204631162818811/PAF-01FySobU5By7w4U28Sd1zOiTOUAs-TNhfMg5gN6IDZVu-N9C2DtZiSKE3pEsb49A',
+				'https://discord.com/api/webhooks/1415332026617303140/m4k2oSMlRctt2zxteCX0k0UdNiwPH7IEcezas1DL5W7ZYb75YAf8gN9q4OyQ6cPKzJ1M',
 				{
 					method: 'POST',
 					body: formData,
@@ -93,7 +100,7 @@ function ContractActions() {
 				<div className="flex items-center space-x-1 text-xs text-text-secondary">
 					<HugeiconsIcon icon={LicenseIcon} size={14} />
 					<span>
-						{t('contract.readiness')}: {validChecks}/3
+						{t('contract.readiness')}: {validChecks}/4
 					</span>
 				</div>
 			</div>
@@ -114,12 +121,12 @@ function ContractActions() {
 			<div className="mb-6 mt-5">
 				<div className="flex items-center justify-between mb-2">
 					<span className="text-xs font-medium text-text-primary">{t('contract.progress')}</span>
-					<span className="text-xs text-text-secondary">{Math.round((validChecks / 3) * 100)}%</span>
+					<span className="text-xs text-text-secondary">{Math.round((validChecks / 4) * 100)}%</span>
 				</div>
 				<div className="w-full bg-muted rounded-full h-2 bg-slate-100">
 					<div
 						className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-smooth"
-						style={{ width: `${(validChecks / 3) * 100}%` }}
+						style={{ width: `${(validChecks / 4) * 100}%` }}
 					/>
 				</div>
 			</div>
@@ -127,7 +134,7 @@ function ContractActions() {
 			<button
 				onClick={handleDownloadPDF}
 				disabled={isGenerating || !isFormValid()}
-				className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-white font-medium transition bg-blue-500 disabled:opacity-50`}>
+				className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-white font-medium transition bg-blue-600 disabled:opacity-50`}>
 				<HugeiconsIcon icon={Download04Icon} size={20} strokeWidth={2} />
 				{isGenerating ? t('contract.generating') : t('contract.generatePDF')}
 			</button>
