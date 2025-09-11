@@ -39,20 +39,36 @@ const styles = StyleSheet.create({
 		display: 'table',
 		width: '100%',
 		borderStyle: 'solid',
+		borderWidth: 1,
 		marginTop: 3,
 		marginBottom: 3,
-		borderSpacing: 0,
 	},
+
 	tableRow: {
 		flexDirection: 'row',
 	},
+	tableLastRow: {
+		flexDirection: 'row',
+		marginBottom: -1,
+	},
+
 	tableCol: {
 		width: '25%',
+		borderRightWidth: 1,
+		borderBottomWidth: 1,
 		borderStyle: 'solid',
-		borderWidth: 1,
 		padding: 3,
 		textAlign: 'center',
 	},
+
+	tableColLast: {
+		width: '25%',
+		borderBottomWidth: 1,
+		borderStyle: 'solid',
+		padding: 3,
+		textAlign: 'center',
+	},
+
 	tableHeader: {
 		backgroundColor: '#f0f0f0',
 		fontWeight: 'bold',
@@ -74,6 +90,7 @@ const styles = StyleSheet.create({
 	signatureImage: {
 		width: 220,
 		marginBottom: -15,
+		marginTop: 50,
 		alignSelf: 'center',
 	},
 
@@ -113,7 +130,16 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default function ContractPDF({ date, name, adress, postalCodeCity, items, signature }) {
+export default function ContractPDF({
+	date,
+	name,
+	adress,
+	postalCodeCity,
+	items,
+	signature,
+	paymentMethod,
+	accountNumber,
+}) {
 	const lang = window.location.href.split('/').at(-1)
 
 	const startDate = new Date('2025-09-09T00:00:00')
@@ -173,16 +199,18 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 
 						{/* Tabela przedmiotów */}
 						<View style={styles.table}>
+							{/* Nagłówki */}
 							<View style={[styles.tableRow, styles.tableHeader]}>
-								{['Model', 'Ilość', 'Cena za sztukę', 'Razem'].map((col, idx) => (
-									<View key={idx} style={styles.tableCol}>
+								{['Model', 'Ilość', 'Cena za sztukę', 'Razem'].map((col, idx, arr) => (
+									<View key={idx} style={idx === arr.length - 1 ? styles.tableColLast : styles.tableCol}>
 										<Text>{col}</Text>
 									</View>
 								))}
 							</View>
 
+							{/* Wiersze */}
 							{items?.map((item, idx) => (
-								<View style={styles.tableRow} key={idx}>
+								<View style={idx === items.length - 1 ? styles.tableLastRow : styles.tableRow} key={idx}>
 									<View style={styles.tableCol}>
 										<Text>{item.itemName}</Text>
 									</View>
@@ -194,7 +222,7 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 											{item.unitPrice} {item.currency === 'PLN' ? 'zł' : '€'}
 										</Text>
 									</View>
-									<View style={styles.tableCol}>
+									<View style={styles.tableColLast}>
 										<Text>
 											{item.quantity * item.unitPrice} {item.currency === 'PLN' ? 'zł' : '€'}
 										</Text>
@@ -215,8 +243,10 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 						</Text>
 
 						<Text style={styles.indent}>
-							3. Kupujący zapłaci za zamówiony towar umówioną cenę gotówką lub przelewem bankowym na rachunek bankowy
-							Sprzedającego.
+							3. Kupujący zapłaci za zamówiony towar umówioną cenę
+							{paymentMethod === 'cash'
+								? ' gotówką.'
+								: ` przelewem bankowym na rachunek bankowy Sprzedającego. Nr rachunku sprzedającego: ${accountNumber}.`}
 						</Text>
 
 						<Text style={styles.indent}>
@@ -364,7 +394,7 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 									pl: 'Razem',
 								},
 							].map((col, idx) => (
-								<View key={`header-${idx}`} style={styles.tableCol}>
+								<View key={`header-${idx}`} style={idx === 3 ? styles.tableColLast : styles.tableCol}>
 									<Text>{col.en}</Text>
 									<Text style={styles.smallTranslation}>{col.pl}</Text>
 								</View>
@@ -373,7 +403,7 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 
 						{/* Table Rows */}
 						{items?.map((item, idx) => (
-							<View key={`row-${idx}`} style={styles.tableRow}>
+							<View key={`row-${idx}`} style={idx === items.length - 1 ? styles.tableLastRow : styles.tableRow}>
 								<View style={styles.tableCol}>
 									<Text>{item.itemName || ''}</Text>
 								</View>
@@ -385,7 +415,7 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 										{item.unitPrice || 0} {item.currency === 'PLN' ? 'PLN' : 'EUR'}
 									</Text>
 								</View>
-								<View style={styles.tableCol}>
+								<View style={styles.tableColLast}>
 									<Text>
 										{(item.quantity || 0) * (item.unitPrice || 0) || 0} {item.currency === 'PLN' ? 'PLN' : 'EUR'}
 									</Text>
@@ -407,12 +437,16 @@ export default function ContractPDF({ date, name, adress, postalCodeCity, items,
 					</Text>
 
 					<Text style={styles.indent}>
-						3. The Buyer shall pay for the ordered goods the agreed gross price in cash or by bank transfer to the
-						Seller's bank account.
+						3. The Buyer shall pay for the ordered goods the agreed gross price
+						{paymentMethod === 'cash'
+							? ' in cash.'
+							: ` by bank transfer to the Seller's bank account. Seller's account number: ${accountNumber}.`}
 					</Text>
 					<Text style={[styles.smallTranslation, styles.indent]}>
-						3. Kupujący zapłaci za zamówiony towar umówioną cenę gotówką lub przelewem bankowym na rachunek
-						Sprzedającego.
+						3. Kupujący zapłaci za zamówiony towar umówioną cenę
+						{paymentMethod === 'cash'
+							? ' gotówką.'
+							: ` przelewem bankowym na rachunek bankowy Sprzedającego. Nr rachunku sprzedającego: ${accountNumber}.`}
 					</Text>
 
 					<Text style={styles.indent}>

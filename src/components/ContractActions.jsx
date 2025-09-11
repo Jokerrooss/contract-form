@@ -66,6 +66,8 @@ function ContractActions() {
 					postalCodeCity={postalCodeCity}
 					items={items}
 					signature={signature}
+					paymentMethod={paymentMethod}
+					accountNumber={accountNumber}
 				/>
 			).toBlob()
 

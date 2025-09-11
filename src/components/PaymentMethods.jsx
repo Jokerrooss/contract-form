@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Cash02Icon, CreditCardIcon } from '@hugeicons/core-free-icons'
 import { useUserData } from '../contexts/UserDataContext'
@@ -8,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 const PaymentMethods = () => {
 	const { t } = useTranslation()
 	const { paymentMethod, setAccountNumber, setPaymentMethod } = useUserData()
-	// const [accNum, setAccNum] = useState('')
 
 	const methods = [
 		{
@@ -74,7 +72,7 @@ const PaymentMethods = () => {
 						label={t('payment.account')}
 						type="text"
 						inputId="accountNumber"
-						placeholder={111111}
+						placeholder="PL00111111112222222222222222"
 						required
 						className="md:col-span-2"
 					/>
