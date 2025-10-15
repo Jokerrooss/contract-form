@@ -305,7 +305,7 @@ export default function ContractPDF({
 					{/* Podpisy */}
 					<View style={styles.signatureBlock}>
 						<View style={styles.signatureBox}>
-							<Image src="../../public/signature.png" style={styles.signatureImageBuyer} />
+							<Image src="/signature.png" style={styles.signatureImageBuyer} />
 							<Text style={styles.signatureLine}> </Text>
 							<Text>Kupujący</Text>
 						</View>
@@ -532,7 +532,7 @@ export default function ContractPDF({
 				{/* Signatures */}
 				<View style={styles.signatureBlock}>
 					<View style={styles.signatureBox}>
-						<Image src={'../../public/signature.png'} style={styles.signatureImageBuyer} />
+						<Image src={'/signature.png'} style={styles.signatureImageBuyer} />
 						<Text style={styles.signatureLine}> </Text>
 						<Text>Buyer (Kupujący)</Text>
 					</View>
