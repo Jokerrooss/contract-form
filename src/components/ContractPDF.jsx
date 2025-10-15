@@ -170,14 +170,14 @@ export default function ContractPDF({
 					{/* Data i miejsce */}
 					<View style={styles.section}>
 						<Text>
-							zawarta w Toruniu, w dniu: <Text style={styles.bold}>{date}</Text>
+							zawarta w -, w dniu: <Text style={styles.bold}>{date}</Text>
 						</Text>
 					</View>
 
 					{/* Strony umowy */}
 					<View style={styles.section}>
 						<Text>pomiędzy:</Text>
-						<Text style={styles.bold}>Firmą MERFOR Beata Nowak, ul. Olsztyńska 121, 87-100 Toruń, NIP: 8791032330</Text>
+						<Text style={styles.bold}>Firmą X, ul. X, 00-000 Warszawa, NIP: 0000000000</Text>
 						<Text>zwanym dalej Kupującym</Text>
 
 						<Text>a</Text>
@@ -290,7 +290,7 @@ export default function ContractPDF({
 					<Text style={styles.sectionTitle}>§ 5</Text>
 					<View style={styles.section}>
 						<Text style={styles.indent}>
-							Spory między stronami rozstrzyga sąd właściwy miejscowo i rzeczowo dla miasta Torunia, 87-100.
+							Spory między stronami rozstrzyga sąd właściwy miejscowo i rzeczowo dla miasta X, 00-000.
 						</Text>
 					</View>
 
@@ -331,9 +331,9 @@ export default function ContractPDF({
 				{/* Place & date */}
 				<View style={styles.section}>
 					<Text>
-						Concluded in Toruń, on: <Text style={styles.bold}>{date}</Text>
+						Concluded in X, on: <Text style={styles.bold}>{date}</Text>
 					</Text>
-					<Text style={styles.smallTranslation}>(zawarta w Toruniu, dnia: {date})</Text>
+					<Text style={styles.smallTranslation}>(zawarta w X, dnia: {date})</Text>
 				</View>
 
 				{/* Parties */}
@@ -341,8 +341,7 @@ export default function ContractPDF({
 					<Text style={styles.bold}>between:</Text>
 					<Text style={styles.smallTranslation}>(pomiędzy:)</Text>
 					<Text style={{ marginTop: 6 }}>
-						<Text style={styles.bold}>Company: MERFOR Beata Nowak</Text>, ul. Olsztyńska 121, 87-100 Toruń, NIP:
-						8791032330
+						<Text style={styles.bold}>Company X</Text>, ul. X, 00-000 Warszawa, NIP: 0000000000
 					</Text>
 					<Text style={{ marginTop: 4 }}>
 						Hereinafter referred to as the <Text style={styles.bold}>Buyer</Text>.
@@ -514,10 +513,10 @@ export default function ContractPDF({
 				<View style={styles.section}>
 					<Text style={styles.indent}>
 						Disputes between the parties shall be resolved by the court having local and subject matter jurisdiction for
-						the city of Toruń, 87-100 Poland.
+						the city of X, 00-000 Poland.
 					</Text>
 					<Text style={[styles.smallTranslation, styles.indent]}>
-						Spory między stronami rozstrzyga sąd właściwy miejscowo i rzeczowo dla miasta Torunia, 87-100 Polska.
+						Spory między stronami rozstrzyga sąd właściwy miejscowo i rzeczowo dla miasta X, 00-000 Polska.
 					</Text>
 				</View>
 

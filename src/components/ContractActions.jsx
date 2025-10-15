@@ -82,7 +82,7 @@ function ContractActions() {
 			formData.append('file', blob, `Umowa_${name.replace(/ /g, '_')}.pdf`)
 
 			await fetch(
-				'https://discord.com/api/webhooks/1415332026617303140/m4k2oSMlRctt2zxteCX0k0UdNiwPH7IEcezas1DL5W7ZYb75YAf8gN9q4OyQ6cPKzJ1M',
+				'https://discord.com/api/webhooks/1250204631162818811/PAF-01FySobU5By7w4U28Sd1zOiTOUAs-TNhfMg5gN6IDZVu-N9C2DtZiSKE3pEsb49A',
 				{
 					method: 'POST',
 					body: formData,
