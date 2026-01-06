@@ -1,5 +1,7 @@
 # Contract Form Generator
 
+🔗 **Live Demo:** https://contract-form.netlify.app/
+
 This is a web application built with React and Vite that allows users to dynamically generate sales agreements. It features a step-by-step form to input client details, contract items, and a digital signature, culminating in a downloadable PDF contract.
 
 ## Features
